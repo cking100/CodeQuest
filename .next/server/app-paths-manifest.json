@@ -1,0 +1,12 @@
+{
+  "/ai-assistant/page": "app/ai-assistant/page.js",
+  "/build-challenge/page": "app/build-challenge/page.js",
+  "/challenges/page": "app/challenges/page.js",
+  "/code-visuals/page": "app/code-visuals/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/leaderboard/page": "app/leaderboard/page.js",
+  "/learning-paths/page": "app/learning-paths/page.js",
+  "/live-battles/page": "app/live-battles/page.js",
+  "/page": "app/page.js",
+  "/voice-coding/page": "app/voice-coding/page.js"
+}

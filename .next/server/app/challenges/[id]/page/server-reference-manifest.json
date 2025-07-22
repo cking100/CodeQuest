@@ -1,0 +1,16 @@
+{
+  "node": {
+    "40c71c826b2d748941de50dcb2b56c03c3acadc54d": {
+      "workers": {
+        "app/challenges/[id]/page": {
+          "moduleId": "[project]/.next-internal/server/app/challenges/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/evaluate-code-flow.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/challenges/[id]/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

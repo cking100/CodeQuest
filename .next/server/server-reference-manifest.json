@@ -1,0 +1,28 @@
+{
+  "node": {
+    "409d37e3315ea344d83e5759cffb25da2b51041dff": {
+      "workers": {
+        "app/live-battles/page": {
+          "moduleId": "[project]/.next-internal/server/app/live-battles/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/generate-battle-solution.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/live-battles/page": "action-browser"
+      }
+    },
+    "40d84bd9f6d6b4d29b0e775f3ff58fbab592384887": {
+      "workers": {
+        "app/ai-assistant/page": {
+          "moduleId": "[project]/.next-internal/server/app/ai-assistant/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/chat.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/ai-assistant/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "A1Ibg0OLOOFpo21lD84a5ncudRFlK+Wg0KTvxGUfnNk="
+}

@@ -1,0 +1,16 @@
+{
+  "node": {
+    "409d37e3315ea344d83e5759cffb25da2b51041dff": {
+      "workers": {
+        "app/live-battles/page": {
+          "moduleId": "[project]/.next-internal/server/app/live-battles/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/generate-battle-solution.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/live-battles/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}
