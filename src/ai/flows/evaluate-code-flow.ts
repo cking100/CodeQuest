@@ -1,36 +1,25 @@
-
 'use server';
-/**
- * @fileOverview A flow to evaluate user-submitted code for correctness.
- *
- * - evaluateCode - A function that evaluates the code against the problem.
- * - EvaluateCodeInput - The input type for the evaluateCode function.
- * - EvaluateCodeOutput - The return type for the evaluateCode function.
- */
-
 import {ai} from '@/ai/genkit';
 import {z} from 'zod';
 import {challenges, type Challenge} from '@/lib/challenges-data';
 
-const EvaluateCodeInputSchema = z.object({
+const codeinput = z.object({
   code: z.string().describe("The user's code submission."),
   language: z.string().describe('The programming language of the code.'),
   challengeId: z.string().describe('The ID of the challenge being attempted.'),
 });
-export type EvaluateCodeInput = z.infer<typeof EvaluateCodeInputSchema>;
+export type codeinput = z.infer<typeof codeinput>;
 
-const EvaluateCodeOutputSchema = z.object({
+const codeSchema = z.object({
   success: z.boolean().describe('Whether the code passed all test cases.'),
   output: z.string().describe('The output from the code execution, e.g., "All test cases passed!" or details on the failed test case.'),
 });
-export type EvaluateCodeOutput = z.infer<typeof EvaluateCodeOutputSchema>;
+export type EvaluateCodeOutput = z.infer<typeof codeSchema>;
 
-export async function evaluateCode(input: EvaluateCodeInput): Promise<EvaluateCodeOutput> {
+export async function evaluateCode(input: codeinput): Promise<EvaluateCodeOutput> {
   return evaluateCodeFlow(input);
 }
-
-// Define a new Zod schema for the prompt input that includes the full challenge data
-const EvaluatePromptInputSchema = EvaluateCodeInputSchema.extend({
+const EvaluatePromptInputSchema = codeinput.extend({
     challenge: z.custom<Challenge>(),
 });
 
@@ -38,7 +27,7 @@ const EvaluatePromptInputSchema = EvaluateCodeInputSchema.extend({
 const prompt = ai.definePrompt({
   name: 'evaluateCodePrompt',
   input: {schema: EvaluatePromptInputSchema},
-  output: {schema: EvaluateCodeOutputSchema},
+  output: {schema: codeSchema},
   prompt: `You are an expert code judge. Your task is to evaluate a user's code submission for a specific challenge with 100% accuracy.
 
 **Challenge Details:**
@@ -80,8 +69,8 @@ Now, begin your evaluation. First, provide a brief, silent "chain-of-thought" an
 const evaluateCodeFlow = ai.defineFlow(
   {
     name: 'evaluateCodeFlow',
-    inputSchema: EvaluateCodeInputSchema,
-    outputSchema: EvaluateCodeOutputSchema,
+    inputSchema: codeinput,
+    outputSchema: codeSchema,
   },
   async (input) => {
     const challenge = challenges.find((c) => c.id === input.challengeId);
