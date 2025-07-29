@@ -1,63 +1,54 @@
-// src/ai/flows/suggest-code-improvements.ts
-'use server';
+'use server'
 
-/**
- * @fileOverview This file defines a Genkit flow for suggesting code improvements.
- *
- * - suggestCodeImprovements - A function that takes code as input and returns improvement suggestions.
- * - SuggestCodeImprovementsInput - The input type for the suggestCodeImprovements function.
- * - SuggestCodeImprovementsOutput - The return type for the suggestCodeImprovements function.
- */
+import {ai} from '@/ai/genkit'
+import {z} from 'genkit'
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+const suggcode = z.object({
+    code: z.string().describe("some code from user"),
+    programmingLanguage: z.string().optional().describe("lang of the code")
+})
+export type codeinput = z.infer<typeof suggcode>
 
-const SuggestCodeImprovementsInputSchema = z.object({
-  code: z.string().describe('The code to be improved.'),
-  programmingLanguage: z
-    .string()
-    .optional()
-    .describe('The programming language of the code.'),
-});
-export type SuggestCodeImprovementsInput = z.infer<typeof SuggestCodeImprovementsInputSchema>;
+const outputcode = z.object({
+    improvements: z.string().describe("what to fix in code")
+})
+export type codeoutput = z.infer<typeof outputcode>
 
-const SuggestCodeImprovementsOutputSchema = z.object({
-  improvements: z.string().describe('Suggestions for improving the code.'),
-});
-export type SuggestCodeImprovementsOutput = z.infer<typeof SuggestCodeImprovementsOutputSchema>;
 
-export async function suggestCodeImprovements(
-  input: SuggestCodeImprovementsInput
-): Promise<SuggestCodeImprovementsOutput> {
-  return suggestCodeImprovementsFlow(input);
+export async function doSuggestions(input: codeinput): Promise<codeoutput>{
+  return flowSuggest(input)
 }
 
-const prompt = ai.definePrompt({
-  name: 'suggestCodeImprovementsPrompt',
-  input: {schema: SuggestCodeImprovementsInputSchema},
-  output: {schema: SuggestCodeImprovementsOutputSchema},
-  prompt: `You are an AI assistant that helps users improve their code.
+const promptSuggest = ai.definePrompt({
+  name: "codereviewprompt",
+  input: {schema: suggcode},
+  output: {schema: outputcode},
+  prompt: `You are a AI who gives tips to make code better.
 
-  You will be given a piece of code and your task is to provide suggestions on how to improve its efficiency, readability, and security.
-  You must return your response in markdown format.
+{% if programmingLanguage %}
+Lang: {{programmingLanguage}}
+{% endif %}
 
-  {% if programmingLanguage %}The code is written in {{programmingLanguage}}.{% endif %}
+Code:
+\`\`\`
+{{{code}}}
+\`\`\`
 
-  Code:
-  \`\`\`
-  {{{code}}}
-  \`\`\`
-  `,
-});
+Give ideas to improve performance, readability, bugs or anything else. Say it in markdown.
+`
+})
 
-const suggestCodeImprovementsFlow = ai.defineFlow(
-  {
-    name: 'suggestCodeImprovementsFlow',
-    inputSchema: SuggestCodeImprovementsInputSchema,
-    outputSchema: SuggestCodeImprovementsOutputSchema,
-  },
-  async input => {
-    const {output} = await prompt(input);
-    return output!;
+
+const flowSuggest = ai.defineFlow({
+  name: "flowSuggest",
+  inputSchema: suggcode,
+  outputSchema: outputcode
+}, async (input) => {
+  const result = await promptSuggest(input)
+
+  if (!result.output) {
+    return { improvements: "No suggestions found. Try again with different code." }  
   }
-);
+
+  return result.output
+})
