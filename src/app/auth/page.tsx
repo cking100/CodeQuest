@@ -1,6 +1,4 @@
-
 'use client';
-
 import { useState } from 'react';
 import { useAuth } from '@/context/auth-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,7 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { Github, Loader, LogOut } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-function GoogleIcon() {
+function Icon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
       <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
@@ -22,16 +20,15 @@ function GoogleIcon() {
     </svg>
   );
 }
-
 export default function AuthPage() {
   const { user, signUp, signIn, signInWithGoogle, signOut } = useAuth();
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoad] = useState(false);
 
-  const handleAuthAction = async (action: 'signIn' | 'signUp', provider?: 'google') => {
-    setIsLoading(true);
+  const Authy = async (action: 'signIn' | 'signUp', provider?: 'google') => {
+    setIsLoad(true);
     try {
       if (provider === 'google') {
         await signInWithGoogle();
@@ -51,19 +48,19 @@ export default function AuthPage() {
         variant: 'destructive',
       });
     } finally {
-      setIsLoading(false);
+      setIsLoad(false);
     }
   };
 
   if (user) {
     return (
-      <Card className="w-full max-w-md mx-auto">
+      <Card className="auth">
         <CardHeader>
           <CardTitle>You are logged in</CardTitle>
           <CardDescription>Welcome back, {user.email}!</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button onClick={signOut} className="w-full">
+          <Button onClick={signOut} className="auth">
             <LogOut className="mr-2" />
             Sign Out
           </Button>
@@ -73,14 +70,13 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="flex justify-center items-center">
-      <Tabs defaultValue="signin" className="w-full max-w-md">
-        <TabsList className="grid w-full grid-cols-2">
+    <div className="flex">
+      <Tabs defaultValue="signin" className="sigm">
+        <TabsList className="table">
           <TabsTrigger value="signin">Sign In</TabsTrigger>
           <TabsTrigger value="signup">Sign Up</TabsTrigger>
         </TabsList>
-
-        {/* Sign In Tab */}
+        {}
         <TabsContent value="signin">
           <Card>
             <CardHeader>
@@ -96,20 +92,20 @@ export default function AuthPage() {
                 <Label htmlFor="password-signin">Password</Label>
                 <Input id="password-signin" type="password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={isLoading} />
               </div>
-              <Button onClick={() => handleAuthAction('signIn')} disabled={isLoading || !email || !password} className="w-full">
+              <Button onClick={() => Authy('signIn')} disabled={isLoading || !email || !password} className="w-full">
                 {isLoading && <Loader className="mr-2 animate-spin" />}
                 Sign In
               </Button>
               <Separator className="my-4" />
-              <Button variant="outline" onClick={() => handleAuthAction('signIn', 'google')} disabled={isLoading} className="w-full">
-                <GoogleIcon />
+              <Button variant="outline" onClick={() => Authy('signIn', 'google')} disabled={isLoading} className="w-full">
+                <Icon />
                 <span className="ml-2">Sign in with Google</span>
               </Button>
             </CardContent>
           </Card>
         </TabsContent>
 
-        {/* Sign Up Tab */}
+        {}
         <TabsContent value="signup">
           <Card>
             <CardHeader>
@@ -125,13 +121,13 @@ export default function AuthPage() {
                 <Label htmlFor="password-signup">Password</Label>
                 <Input id="password-signup" type="password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={isLoading} />
               </div>
-              <Button onClick={() => handleAuthAction('signUp')} disabled={isLoading || !email || !password} className="w-full">
+              <Button onClick={() => Authy('signUp')} disabled={isLoading || !email || !password} className="w-full">
                 {isLoading && <Loader className="mr-2 animate-spin" />}
                 Create Account
               </Button>
                <Separator className="my-4" />
-              <Button variant="outline" onClick={() => handleAuthAction('signIn', 'google')} disabled={isLoading} className="w-full">
-                <GoogleIcon />
+              <Button variant="outline" onClick={() => Authy ('signIn', 'google')} disabled={isLoading} className="w-full">
+                <Icon />
                 <span className="ml-2">Sign up with Google</span>
               </Button>
             </CardContent>
