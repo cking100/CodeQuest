@@ -14,21 +14,20 @@ import { CheckCircle, XCircle, Loader } from 'lucide-react';
 import { evaluateCode, type EvaluateCodeOutput } from '@/ai/flows/evaluate-code-flow';
 import { useToast } from '@/hooks/use-toast';
 
-export default function ChallengeDetailPage() {
+export default function page() {
   const params = useParams();
   const challengeId = typeof params.id === 'string' ? params.id : '';
   const challenge = challenges.find(c => c.id === challengeId);
   const [code, setCode] = useState('');
-  const [language, setLanguage] = useState('python');
+  const [language, Language] = useState('python');
   const [output, setOutput] = useState<EvaluateCodeOutput | null>(null);
-  const [isRunning, setIsRunning] = useState(false);
+  const [isRunning, run] = useState(false);
   const { toast } = useToast();
   
   if (!challenge) {
     notFound();
   }
-
-  const handleRunCode = async () => {
+  const handlCode = async () => {
     if (!code) {
       toast({
         title: 'No Code',
@@ -37,7 +36,7 @@ export default function ChallengeDetailPage() {
       });
       return;
     }
-    setIsRunning(true);
+    run(true);
     setOutput(null);
     try {
       const result = await evaluateCode({
@@ -55,7 +54,7 @@ export default function ChallengeDetailPage() {
       });
       setOutput({ success: false, output: 'An error occurred during evaluation.' });
     } finally {
-      setIsRunning(false);
+      run(false);
     }
   }
 
@@ -90,7 +89,7 @@ export default function ChallengeDetailPage() {
       </Card>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-4">
-            <Select value={language} onValueChange={setLanguage}>
+            <Select value={language} onValueChange={Language}>
                 <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Select Language" />
                 </SelectTrigger>
@@ -102,17 +101,17 @@ export default function ChallengeDetailPage() {
         </div>
         <Card className="flex-grow flex flex-col">
             <CardContent className="p-0 flex-grow flex flex-col">
-                 <Textarea
-                    placeholder={`Write your ${language} code here...`}
-                    className="flex-grow w-full h-full rounded-b-none border-0 font-code text-base"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    />
-            </CardContent>
-        </Card>
+              <Textarea
+                placeholder={`Write your ${language} code here...`}
+                  className="flex-grow w-full h-full rounded-b-none border-0 font-code text-base"
+                  value={code}
+              onChange={(e) => setCode(e.target.value)}
+              />
+        </CardContent>
+      </Card>
         <div className="flex-shrink-0">
-             <h3 className="font-semibold mb-2">Output</h3>
-             <Card className="min-h-[100px]">
+          <h3 className="font-semibold mb-2">Output</h3>
+        <Card className="min-h-[100px]">
                 <CardContent className="p-4">
                     {isRunning ? (
                         <div className="flex items-center gap-2 text-muted-foreground">
@@ -134,7 +133,7 @@ export default function ChallengeDetailPage() {
             </Card>
         </div>
         <div className="flex justify-end gap-2">
-            <Button variant="outline" onClick={handleRunCode} disabled={isRunning}>
+            <Button variant="outline" onClick={handlCode} disabled={isRunning}>
               {isRunning && <Loader className="mr-2 h-4 w-4 animate-spin" />}
               Run Code
             </Button>
