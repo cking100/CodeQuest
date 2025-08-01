@@ -13,7 +13,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { PlusCircle, Trash2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-const testCaseSchema = z.object({
+const test = z.object({
   input: z.string().min(1, 'Test case input is required.'),
   expected: z.string().min(1, 'Expected output is required.'),
 });
@@ -25,12 +25,12 @@ const challengeFormSchema = z.object({
   difficulty: z.enum(['Easy', 'Medium', 'Hard'], {
     required_error: 'You need to select a difficulty.',
   }),
-  testCases: z.array(testCaseSchema).min(1, 'At least one test case is required.'),
+  testCases: z.array(test).min(1, 'At least one test case is required.'),
 });
 
 type ChallengeFormValues = z.infer<typeof challengeFormSchema>;
 
-export default function BuildChallengePage() {
+export default function BuildChallenge() {
   const { toast } = useToast();
   const form = useForm<ChallengeFormValues>({
     resolver: zodResolver(challengeFormSchema),
@@ -47,8 +47,7 @@ export default function BuildChallengePage() {
     name: 'testCases',
   });
 
-  function onSubmit(data: ChallengeFormValues) {
-    // Here you would typically send the data to your backend for review and approval.
+  function sub(data: ChallengeFormValues) {
     console.log('Challenge submitted:', data);
     toast({
       title: 'Challenge Submitted!',
@@ -61,71 +60,70 @@ export default function BuildChallengePage() {
     <Card>
       <CardHeader>
         <CardTitle>Build a Challenge</CardTitle>
-        <CardDescription>Create your own coding challenge and share it with the community. Submissions will be reviewed before publishing.</CardDescription>
+        <CardDescription>Create your own coding challenge  Submissions will be reviewed before publishing.</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
+          <form onSubmit={form.handleSubmit(sub)} className="space-y-8">
+        <FormField
+          control={form.control}
+        name="title"
+                render={({ field }) => (
                 <FormItem>
                   <FormLabel>Challenge Title</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., 'Two Sum'" {...field} />
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
+              <FormMessage />
+                    </FormItem>
               )}
             />
-
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Describe the problem, input, and expected output..." rows={6} {...field} />
+              <FormField
+                control={form.control}
+                  name="description"
+                    render={({ field }) => (
+              <FormItem>
+        <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder="Describe the problem, input, and expected output..." rows={6} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
-              )}
+    )}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <FormField
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <FormField
                 control={form.control}
                 name="category"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Input placeholder="e.g., 'Arrays'" {...field} />
-                    </FormControl>
+              <FormItem>
+                      <FormLabel>Category</FormLabel>
+                      <FormControl>
+                          <Input placeholder="e.g., 'Arrays'" {...field} />
+                          </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="difficulty"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Difficulty</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
+        <FormField
+          control={form.control}
+            name="difficulty"
+            render={({ field }) => (
+                <FormItem>
+                        <FormLabel>Difficulty</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a difficulty" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Easy">Easy</SelectItem>
-                        <SelectItem value="Medium">Medium</SelectItem>
-                        <SelectItem value="Hard">Hard</SelectItem>
-                      </SelectContent>
+                    <SelectValue placeholder="Select a difficulty" />
+                    </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                    <SelectItem value="Easy">Easy</SelectItem>
+                      <SelectItem value="Medium">Medium</SelectItem>
+                    <SelectItem value="Hard">Hard</SelectItem>
+                </SelectContent>
                     </Select>
                     <FormMessage />
                   </FormItem>
@@ -138,9 +136,9 @@ export default function BuildChallengePage() {
               <FormDescription className="mb-4">Provide at least one test case to verify solutions.</FormDescription>
               <div className="space-y-4">
                 {fields.map((field, index) => (
-                  <div key={field.id} className="flex flex-col md:flex-row gap-4 items-start p-4 border rounded-lg">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow w-full">
-                       <FormField
+                <div key={field.id} className="flex flex-col md:flex-row gap-4 items-start p-4 border rounded-lg">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow w-full">
+                    <FormField
                         control={form.control}
                         name={`testCases.${index}.input`}
                         render={({ field }) => (
