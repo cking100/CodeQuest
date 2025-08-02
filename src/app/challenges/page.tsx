@@ -50,7 +50,6 @@ function ChallengeTable({ challenges, difficulty }: { challenges: Challenge[]; d
     </Table>
   );
 }
-
 export default function ChallengesPage() {
   return (
     <Card>
