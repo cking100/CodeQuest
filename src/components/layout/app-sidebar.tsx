@@ -104,14 +104,14 @@ export default function AppSidebar() {
                 >
                     {item.onClick ? (
                        <>
-                         <item.icon />
-                         <span>{item.label}</span>
+                      <item.icon />
+                      <span>{item.label}</span>
                        </>
                     ) : (
-                       <Link href={item.href}>
+                  <Link href={item.href}>
                          <item.icon />
-                         <span>{item.label}</span>
-                       </Link>
+                              <span>{item.label}</span>
+                    </Link>
                     )}
                 </SidebarMenuButton>
                 </SidebarMenuItem>
