@@ -1,6 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
-export default function MiniProjectsPage() {
+export default function ProjectPage() {
   return (
     <Card>
       <CardHeader>
