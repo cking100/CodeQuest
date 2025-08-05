@@ -4,17 +4,15 @@ import { learningPaths } from '@/lib/learning-paths-data';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Youtube } from 'lucide-react';
-
-export default function LearningPathsPage() {
+export default function Paths() {
   return (
-    <div className="space-y-6">
+    <div className="hii">
       <Card>
         <CardHeader>
           <CardTitle>Learning Paths</CardTitle>
           <CardDescription>Follow structured paths to master new technologies and concepts.</CardDescription>
         </CardHeader>
       </Card>
-
       {learningPaths.map((path) => (
         <Card key={path.id}>
           <CardHeader>
@@ -26,19 +24,19 @@ export default function LearningPathsPage() {
               {path.modules.map((module, index) => (
                 <AccordionItem value={`item-${index}`} key={index}>
                   <AccordionTrigger className="text-lg font-semibold">
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center justify-center bg-primary text-primary-foreground rounded-full w-8 h-8 text-sm">
+                    <div className="centre">
+                      <div className="item">
                         {index + 1}
                       </div>
                       {module.title}
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="pl-16">
-                    <p className="mb-4">{module.description}</p>
+                  <AccordionContent className="proprtyu">
+                    <p className="comp">{module.description}</p>
                     {module.youtubeLink && (
                       <Button asChild variant="outline">
                         <Link href={module.youtubeLink} target="_blank" rel="noopener noreferrer">
-                          <Youtube className="mr-2" />
+                          <Youtube className="mr" />
                           Watch on YouTube
                         </Link>
                       </Button>
