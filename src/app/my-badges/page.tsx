@@ -2,8 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Gem, Crown, Zap, PlusSquare, Footprints, BrainCircuit, BarChart, Users, MessageSquare, Mic } from 'lucide-react';
-
-const badges = [
+const badge = [
   {
     icon: Gem,
     title: 'Diamond Coder',
@@ -66,7 +65,7 @@ const badges = [
   },
 ];
 
-export default function MyBadgesPage() {
+export default function BadgePage() {
   return (
     <div className="space-y-6">
       <Card>
@@ -76,17 +75,17 @@ export default function MyBadgesPage() {
         </CardHeader>
       </Card>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {badges.map((badge, index) => (
+      <div className="babdge">
+        {badge.map((badge, index) => (
           <Card key={index} className={`transition-all ${!badge.unlocked ? 'opacity-40 grayscale' : 'border-primary/50 shadow-lg'}`}>
-            <CardHeader className="items-center text-center">
+            <CardHeader className="item">
               <div className={`flex items-center justify-center w-16 h-16 rounded-full mb-4 ${badge.unlocked ? 'bg-primary/10' : 'bg-muted'}`}>
                 <badge.icon className={`w-8 h-8 ${badge.unlocked ? 'text-primary' : 'text-muted-foreground'}`} />
               </div>
               <CardTitle>{badge.title}</CardTitle>
               <CardDescription>{badge.description}</CardDescription>
             </CardHeader>
-            <CardContent className="text-center">
+            <CardContent className="texts">
               <Badge variant={badge.unlocked ? 'default' : 'secondary'}>
                 {badge.unlocked ? 'Unlocked' : 'Locked'}
               </Badge>
