@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { challenges } from '@/lib/challenges-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -50,6 +51,7 @@ function ChallengeTable({ challenges, difficulty }: { challenges: Challenge[]; d
     </Table>
   );
 }
+
 export default function ChallengesPage() {
   return (
     <Card>
