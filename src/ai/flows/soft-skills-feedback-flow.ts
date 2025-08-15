@@ -1,21 +1,23 @@
 'use server';
+
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
-export const SkillSchema = z.object({
+
+// Keep schemas/constants internal (not exported)
+const SkillSchema = z.object({
   scenario: z.string().describe('The title of the soft skill scenario.'),
   prompt: z.string().describe('The prompt or question given to the user.'),
   codeContext: z.string().nullable().describe('An optional code snippet provided as context for the scenario.'),
   userResponse: z.string().describe("The user's written response to the scenario."),
-  type: z.enum(['technical-writing', 'explain-code', 'problem-solving', 'team-collaboration']).describe('The type of scenario being evaluated.'),
+  type: z.enum(['technical-writing', 'explain-code', 'problem-solving', 'team-collaboration'])
+    .describe('The type of scenario being evaluated.'),
 });
-export type SoftSkillInput = z.infer<typeof SkillSchema>;
 
-
-export const SoftSkillsFeedbackOutputSchema = z.object({
+const SoftSkillsFeedbackOutputSchema = z.object({
   feedback: z.string().describe("Constructive, AI-generated feedback on the user's response, formatted in Markdown."),
 });
-export type SoftSkillsFeedbackOutput = z.infer<typeof SoftSkillsFeedbackOutputSchema>;
-const promptTemplates = {
+
+const promptTemplates: Record<string, string> = {
   'technical-writing': `You are an AI assistant reviewing a user's attempt at technical documentation.
 Scenario: {{scenario}}
 Task: {{prompt}}
@@ -58,9 +60,7 @@ User's Proposed Action:
 
 Provide constructive feedback. Does the user's response prioritize the team's well-being and project goals? Does it demonstrate good negotiation and stakeholder management skills? Is the communication clear and professional? Suggest improvements. Format your feedback in Markdown.`,
 };
-export async function provideSoftSkillsFeedback(
-  input: SoftSkillInput
-): Promise<SoftSkillsFeedbackOutput> {
+export async function provideSoftSkillsFeedback(input: z.infer<typeof SkillSchema>): Promise<z.infer<typeof SoftSkillsFeedbackOutputSchema>> {
   const promptText = promptTemplates[input.type];
 
   const prompt = ai.definePrompt({
