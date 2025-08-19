@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader, Sparkles } from 'lucide-react';
-import { provideSoftSkillsFeedback, type SoftSkillsFeedbackInput } from '@/ai/flows/soft-skills-feedback-flow';
+import { provideSoftSkillsFeedback } from '@/ai/flows/soft-skills-feedback-flow';
+import type { SoftSkillsFeedbackInput } from '@/ai/schemas/soft-skills-schemas';
 
 type Scenario = {
   id: string;
