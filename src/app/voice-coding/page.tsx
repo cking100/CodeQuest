@@ -11,7 +11,7 @@ import { Mic, MicOff, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { challenges, type Challenge } from '@/lib/challenges-data';
 
-// SpeechRecognition might be prefixed in some browsers
+
 const SpeechRecognition =
   (typeof window !== 'undefined' && window.SpeechRecognition) ||
   (typeof window !== 'undefined' && (window as any).webkitSpeechRecognition);
@@ -27,7 +27,6 @@ export default function VoiceCodingPage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Select a random challenge on component mount
     const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
     setChallenge(randomChallenge);
 
@@ -36,7 +35,6 @@ export default function VoiceCodingPage() {
       return;
     }
 
-    // Initialize speech recognition
     const recognition = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
@@ -65,14 +63,13 @@ export default function VoiceCodingPage() {
     };
     
     recognition.onend = () => {
-      // Automatically restart if it's supposed to be listening
       if (isListening) {
         recognition.start();
       }
     };
 
     recognitionRef.current = recognition;
-  }, []); // isListening is intentionally omitted to avoid re-creating recognition instance
+  }, []);
 
   const handleToggleListening = async () => {
     if (!recognitionRef.current) return;
@@ -83,7 +80,6 @@ export default function VoiceCodingPage() {
       toast({ title: 'Voice Disabled', description: 'Stopped listening to your microphone.' });
     } else {
         try {
-            // Check for microphone permission
             await navigator.mediaDevices.getUserMedia({ audio: true });
             setHasPermission(true);
             recognitionRef.current.start();
