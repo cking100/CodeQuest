@@ -3,9 +3,11 @@
 **CodeQuest** is an AI-powered educational platform that makes learning Data Structures and coding more engaging and interactive. It offers personalized coding challenges based on your skill level, integrated voice coding, AI battles, and an inbuilt Gemini chatbot to help you whenever you get stuck.
 
 ![image](https://github.com/user-attachments/assets/f096df42-e012-49c8-9b05-fc5db4f60cb4)
+![image](https://github.com/user-attachments/assets/0a8c800b-c0f7-4813-b9d3-ca96b02ec66c")
+![image](https://github.com/user-attachments/assets/ed1165f5-e15e-474a-baa7-3684b815271b)
 ---
 
-## 📚 Table of Contents
+##  Table of Contents
 
 - [Introduction](#-introduction)
 - [Features](#-features)
@@ -21,7 +23,7 @@
 
 ---
 
-## 🌈 Introduction
+##  Introduction
 
 Learning to code can feel overwhelming, especially when you're stuck on a problem with no one to turn to. That's where **CodeQuest** comes in.
 
@@ -39,40 +41,38 @@ Whether you're just starting out or preparing for technical interviews, CodeQues
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🧠 **AI-powered challenge generation** — Get problems tailored to your skill level (Easy, Medium, Hard)
-- 🏅 **Gamified learning** — Earn badges, level up, and track your progress as you improve
-- 🎙️ **Voice-based coding** — Solve problems hands-free with voice input support
-- ⚔️ **Battle with AI** — Compete against an AI opponent in friendly coding challenges
-- 📊 **Real-time performance analytics** — See your strengths and areas for improvement at a glance
-- 🧩 **Structured learning paths** — Follow guided paths to master Data Structures and Algorithms
-- 💬 **Integrated Gemini chatbot** — Get instant help, hints, and explanations when you're stuck
-- 👨‍💻 **User-friendly interface** — Clean design with smooth navigation and intuitive controls
-- 🔐 **Firebase authentication** — Save your progress and pick up right where you left off
-- 📱 **Responsive design** — Works seamlessly on desktop, tablet, and mobile devices
+-  **AI-powered challenge generation** — Get problems tailored to your skill level (Easy, Medium, Hard)
+-  **Gamified learning** — Earn badges, level up, and track your progress as you improve
+-  **Voice-based coding** — Solve problems hands-free with voice input support
+-  **Battle with AI** — Compete against an AI opponent in friendly coding challenges
+-  **Real-time performance analytics** — See your strengths and areas for improvement at a glance
+-  **Structured learning paths** — Follow guided paths to master Data Structures and Algorithms
+-  **Integrated Gemini chatbot** — Get instant help, hints, and explanations when you're stuck
+-  **User-friendly interface** — Clean design with smooth navigation and intuitive controls
+-  **Firebase authentication** — Save your progress and pick up right where you left off
+-  **Responsive design** — Works seamlessly on desktop, tablet, and mobile devices
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
-### 🧠 Backend
+###  Backend
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 ![Gemini API](https://img.shields.io/badge/Gemini_API-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
-- **Python + FastAPI** — Fast, modern backend API for handling requests and AI integration
+- **Python — Fast, modern backend API for handling requests and AI integration
 - **Firebase** — User authentication and real-time cloud data storage
 - **Gemini API** — Powers intelligent coding hints, explanations, and AI-generated challenges
 
-### 🎨 Frontend
+### Frontend
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-262626?style=for-the-badge&logo=radix-ui&logoColor=white)
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
 
 - **Next.js** — Server-side rendering and dynamic, responsive UI
@@ -82,31 +82,30 @@ Whether you're just starting out or preparing for technical interviews, CodeQues
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 CodeQuest follows a **modular and scalable architecture** that keeps things organized and easy to extend:
 
 1. **Frontend (Next.js)** — The user-facing interface where learners interact with challenges, track progress, and compete in AI battles
-2. **Backend (FastAPI)** — Handles challenge generation, processes AI requests, and manages user data
 3. **Firebase** — Takes care of user authentication, leaderboard storage, and cloud data management
 4. **AI Layer (Gemini API)** — Powers intelligent hints, real-time feedback, and adaptive challenge generation
 
 ---
 
-## 🚀 Setup and Installation
+##  Setup and Installation
 
-### 🧠 Backend Setup
+###  Backend Setup
 
 1. **Clone the repository:**
 ```bash
-   git clone https://github.com/<your-username>/codequest.git
+   git clone https://github.com/cking100/codequest.git
    cd codequest/backend
 ```
 
 2. **Set up a virtual environment:**
 ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  
 ```
 
 3. **Install dependencies:**
@@ -129,25 +128,19 @@ CodeQuest follows a **modular and scalable architecture** that keeps things orga
 ---
 
 ### 🎨 Frontend Setup
-
-1. **Navigate to the frontend directory:**
-```bash
-   cd ../frontend
-```
-
-2. **Install dependencies:**
+1. **Install dependencies:**
 ```bash
    npm install
 ```
 
-3. **Set up environment variables:**
+2. **Set up environment variables:**
 ```bash
    cp .env.example .env
 ```
 
    Configure your `.env` file with the necessary API endpoints and Firebase credentials.
 
-4. **Run the development server:**
+3. **Run the development server:**
 ```bash
    npm run dev
 ```
@@ -169,20 +162,19 @@ CodeQuest follows a **modular and scalable architecture** that keeps things orga
 Here's why I chose each technology:
 
 1. **Next.js with TypeScript** — Gives you fast performance, server-side rendering, and type safety that catches bugs before they happen
-2. **FastAPI + Python** — Perfect for AI integration with fast response times and clean, easy-to-read code
-3. **Firebase** — Makes authentication and data storage simple without having to manage servers
-4. **Gemini API** — Provides smart, contextual coding support and generates personalized feedback
-5. **Tailwind + shadcn/ui** — Creates a clean, modern interface that looks great and works smoothly across all devices
+2. **Firebase** — Makes authentication and data storage simple without having to manage servers
+3. **Gemini API** — Provides smart, contextual coding support and generates personalized feedback
+4. **Tailwind + shadcn/ui** — Creates a clean, modern interface that looks great and works smoothly across all devices
 
 ---
 
-## 🎯 Challenges and Solutions
+##  Challenges and Solutions
 
 *(This section can be filled based on specific challenges you faced during development)*
 
 ---
 
-## 🚀 Future Improvements
+##  Future Improvements
 
 Here are some features I'm planning to add:
 
@@ -194,13 +186,7 @@ Here are some features I'm planning to add:
 
 ---
 
-## 🌐 Deployment
-
-*(Add deployment instructions for your specific hosting platform - Vercel, Railway, etc.)*
-
----
-
-## 📝 Personal Note
+##  Personal Note
 
 I built CodeQuest because I remember how frustrating it was to learn Data Structures and Algorithms without immediate feedback or guidance. My goal was to create a platform that feels less like studying and more like playing a game — where you're motivated to keep going and you actually enjoy the learning process.
 
