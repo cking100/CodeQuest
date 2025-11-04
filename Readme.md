@@ -3,7 +3,7 @@
 **CodeQuest** is an AI-powered educational platform that makes learning Data Structures and coding more engaging and interactive. It offers personalized coding challenges based on your skill level, integrated voice coding, AI battles, and an inbuilt Gemini chatbot to help you whenever you get stuck.
 
 ![image](https://github.com/user-attachments/assets/f096df42-e012-49c8-9b05-fc5db4f60cb4)
-![image](https://github.com/user-attachments/assets/0a8c800b-c0f7-4813-b9d3-ca96b02ec66c")
+![image](https://github.com/user-attachments/assets/0a8c800b-c0f7-4813-b9d3-ca96b02ec66c)
 ![image](https://github.com/user-attachments/assets/ed1165f5-e15e-474a-baa7-3684b815271b)
 ---
 
